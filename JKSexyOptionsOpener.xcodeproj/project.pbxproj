@@ -21,6 +21,7 @@
 		383B83571A9AA27500A23D01 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83511A9AA27500A23D01 /* orange.png */; };
 		383B83581A9AA27500A23D01 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83521A9AA27500A23D01 /* yellow.png */; };
 		383B83591A9AA27500A23D01 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83531A9AA27500A23D01 /* blue.png */; };
+		383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		383B83511A9AA27500A23D01 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
 		383B83521A9AA27500A23D01 /* yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow.png; sourceTree = "<group>"; };
 		383B83531A9AA27500A23D01 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
+		383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSexyButton.h; sourceTree = "<group>"; };
+		383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSexyButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				383B83481A9A991500A23D01 /* JKSexyOptionsOpenerViewController.h */,
 				383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */,
 				383B831F1A9A975E00A23D01 /* Supporting Files */,
+				383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */,
+				383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */,
 			);
 			path = JKSexyOptionsOpener;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				383B83251A9A975E00A23D01 /* AppDelegate.m in Sources */,
+				383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */,
 				383B83221A9A975E00A23D01 /* main.m in Sources */,
 				383B834A1A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m in Sources */,
 			);

@@ -7,20 +7,22 @@
 //
 
 #import "JKSexyOptionsOpenerViewController.h"
+#import "CustomSexyButton.h"
+
 #define DEFAULT_ANIMATION_DURATION 0.5
-#define LONGER_ANIMATION_DURATION 2.0
+#define LONGER_ANIMATION_DURATION 0.5
 
 @interface JKSexyOptionsOpenerViewController ()
 @property (assign) BOOL isOptionsOpened;
 @property (strong) UIView* overlayView;
 @property (weak, nonatomic) IBOutlet UIButton *openOptionsButton;
 @property (strong) UIButton* overlayShowHideButton;
-@property (strong) UIButton* openMenuButtonBlue;
-@property (strong) UIButton* openMenuButtonGreen;
-@property (strong) UIButton* openMenuButtonYellow;
 @property (assign) CGFloat expansionRadius;
 @property (assign) NSInteger numberOfOptions;
 @property (assign) NSInteger buttonDimension;
+@property (strong) NSMutableArray* optionButtonsHolder;
+@property (strong) NSTimer* timer;
+@property (assign) NSInteger counter;
 
 @end
 
@@ -67,12 +69,16 @@
     self.openOptionsButton.alpha = 1.0;
     [self.view addSubview:self.openOptionsButton];
     
-    [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
+                                                  target:self
+                                                selector:@selector(closeOptions:)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+    
+    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION delay:0.2* (self.numberOfOptions - 1)
          usingSpringWithDamping:0.7 initialSpringVelocity:5.0f
                         options:0 animations:^{
-                            self.openMenuButtonBlue.transform = CGAffineTransformMakeTranslation(0, 0);
-                            self.openMenuButtonGreen.transform = CGAffineTransformMakeTranslation(0, 0);
-                            self.openMenuButtonYellow.transform = CGAffineTransformMakeTranslation(0, 0);
                             self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
                         } completion:^(BOOL finished) {
                             [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
@@ -89,28 +95,22 @@
        
         UIView* overlayView = [self getOverlayView];
         
-        
-            /*self.openMenuButtonBlue = [[UIButton alloc] initWithFrame:self.overlayShowHideButton.frame];
-            self.openMenuButtonGreen = [[UIButton alloc] initWithFrame:self.overlayShowHideButton.frame];
-            self.openMenuButtonYellow = [[UIButton alloc] initWithFrame:self.overlayShowHideButton.frame];
-        
-            [self.openMenuButtonBlue setBackgroundImage:[UIImage imageNamed:@"blue.png"] forState:UIControlStateNormal];
-            [self.openMenuButtonGreen setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
-            [self.openMenuButtonYellow setBackgroundImage:[UIImage imageNamed:@"yellow.png"] forState:UIControlStateNormal];
-            [overlayView addSubview:self.openMenuButtonBlue];
-            [overlayView addSubview:self.openMenuButtonGreen];
-            [overlayView addSubview:self.openMenuButtonYellow]; */
+        if(!self.optionButtonsHolder) {
+            self.optionButtonsHolder = [NSMutableArray new];
+            
             NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
             for(NSInteger optionsCount = 0; optionsCount < anglesCollection.count; optionsCount++) {
-                UIButton* button = [[UIButton alloc] initWithFrame:self.overlayShowHideButton.frame];
+                CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
                 [button setBackgroundColor:[UIColor redColor]];
-                CGRect originalFrame = button.frame;
-                CGFloat currentAngleValue = [[anglesCollection objectAtIndex:optionsCount] floatValue];
-                originalFrame = CGRectMake(self.overlayShowHideButton.frame.origin.x  + (_expansionRadius*sinf(currentAngleValue)), self.overlayShowHideButton.frame.origin.y  + (-1 * _expansionRadius * cosl(currentAngleValue)), 30, 30);
-                button.frame = originalFrame;
+                button.identifier = optionsCount;
+                CGFloat currentAngleValue = [anglesCollection[optionsCount] floatValue];
+                button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
+                button.alpha = 0.0;
                 [button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
                 [self.overlayView addSubview:button];
+                [self.optionButtonsHolder addObject:button];
             }
+        }
         
         [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
             overlayView.alpha = 1.0;
@@ -120,13 +120,16 @@
             self.openOptionsButton.alpha = 0.0;
             self.overlayShowHideButton.alpha = 1.0;
             
-            [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+            self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
+                                                          target:self
+                                                        selector:@selector(openOptions:)
+                                                        userInfo:nil
+                                                         repeats:YES];
+            
+            [UIView animateWithDuration:0.2* (self.numberOfOptions - 1) delay:0
                  usingSpringWithDamping:0.35 initialSpringVelocity:5.0f
                                 options:0 animations:^{
                                     self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(M_PI);
-                                    self.openMenuButtonBlue.transform = CGAffineTransformMakeTranslation(-self.expansionRadius, -self.expansionRadius);
-                                    self.openMenuButtonGreen.transform = CGAffineTransformMakeTranslation(self.expansionRadius, -self.expansionRadius);
-                                    self.openMenuButtonYellow.transform = CGAffineTransformMakeTranslation(0, -self.expansionRadius);
                                 } completion:nil];
             
         }];
@@ -167,6 +170,42 @@
         }
     }
     return anglesCollection;
+}
+
+- (void)openOptions:(NSTimer *)timer {
+    
+    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter++];
+    
+        [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+             usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
+                            options:0 animations:^{
+                                individualButton.alpha = 1.0;
+                                individualButton.transform = CGAffineTransformMakeTranslation(individualButton.offsetToApply.x, individualButton.offsetToApply.y);
+                            } completion:nil];
+    
+    if(self.counter >= [self.optionButtonsHolder count]) {
+        self.counter -= 1;
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
+- (void)closeOptions:(NSTimer *)timer {
+    
+    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter--];
+    
+    [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+         usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
+                        options:0 animations:^{
+                            individualButton.alpha = 0.0;
+                            individualButton.transform = CGAffineTransformMakeTranslation(0, 0);
+                        } completion:nil];
+    
+    if(self.counter < 0) {
+        self.counter = 0;
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 @end
