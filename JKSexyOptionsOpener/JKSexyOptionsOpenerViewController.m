@@ -33,7 +33,7 @@
     self.isOptionsOpened = NO;
     self.buttonDimension = 30;
     self.expansionRadius = self.view.frame.size.width/2;
-    self.numberOfOptions = 9;
+    self.numberOfOptions = 5;
     NSInteger maximumExpansionRadius = ((self.view.frame.size.width/2) - self.buttonDimension);
     if(self.expansionRadius > maximumExpansionRadius) {
         self.expansionRadius = maximumExpansionRadius;
@@ -67,6 +67,8 @@
     self.isOptionsOpened = !self.isOptionsOpened;
     self.overlayShowHideButton.alpha = 0.0;
     self.openOptionsButton.alpha = 1.0;
+    [self.openOptionsButton setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
+    
     [self.view addSubview:self.openOptionsButton];
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
@@ -92,7 +94,8 @@
 
 - (IBAction)openOptionsButtonPressed:(UIButton*)sender {
     if(!self.isOptionsOpened) {
-       
+        
+        [sender setBackgroundImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
         UIView* overlayView = [self getOverlayView];
         
         if(!self.optionButtonsHolder) {
@@ -101,12 +104,23 @@
             NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
             for(NSInteger optionsCount = 0; optionsCount < anglesCollection.count; optionsCount++) {
                 CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
-                [button setBackgroundColor:[UIColor redColor]];
+                //[button setBackgroundColor:[UIColor redColor]];
                 button.identifier = optionsCount;
+                CGRect originalFrame = button.frame;
+                originalFrame.size.height += 20;
+                button.frame = originalFrame;
+                button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 20, 0);
+                UILabel* buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, self.overlayShowHideButton.frame.size.height, self.overlayShowHideButton.frame.size.width, 20)];
+                buttonTitle.text = [NSString stringWithFormat:@"%d", optionsCount];
+                buttonTitle.textColor = [UIColor whiteColor];
+                buttonTitle.textAlignment = NSTextAlignmentCenter;
+                [button addSubview:buttonTitle];
+                
                 CGFloat currentAngleValue = [anglesCollection[optionsCount] floatValue];
                 button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
                 button.alpha = 0.0;
-                [button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
+                //[button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
                 [self.overlayView addSubview:button];
                 [self.optionButtonsHolder addObject:button];
             }
@@ -134,6 +148,7 @@
             
         }];
     } else {
+        [sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
         [self removeOverlay];
     }
     self.isOptionsOpened = !self.isOptionsOpened;

@@ -16,9 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMr-8w-WtW">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nMr-8w-WtW">
                                 <rect key="frame" x="145" y="518" width="30" height="30"/>
-                                <state key="normal" backgroundImage="red.png">
+                                <state key="normal" backgroundImage="green.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -41,7 +41,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="red.png" width="128" height="128"/>
+        <image name="green.png" width="128" height="128"/>
         <image name="rf.jpg" width="460" height="276"/>
     </resources>
 </document>
