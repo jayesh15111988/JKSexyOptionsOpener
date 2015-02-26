@@ -34,7 +34,7 @@
     self.buttonDimension = 30;
     CGFloat dimensionToConsider = MIN(self.view.frame.size.width, self.view.frame.size.height);
     self.expansionRadius = dimensionToConsider/2;
-    self.numberOfOptions = 5;
+    self.numberOfOptions = 3;
     NSInteger maximumExpansionRadius = (self.expansionRadius - self.buttonDimension);
     if(self.expansionRadius > maximumExpansionRadius) {
         self.expansionRadius = maximumExpansionRadius;
@@ -150,7 +150,7 @@
                 button.frame = originalFrame;
                 button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                 UILabel* buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, self.overlayShowHideButton.frame.size.height, self.overlayShowHideButton.frame.size.width, 20)];
-                buttonTitle.text = [NSString stringWithFormat:@"%d", optionsCount];
+                buttonTitle.text = [NSString stringWithFormat:@"%ld", (long)optionsCount];
                 buttonTitle.textColor = [UIColor whiteColor];
                 buttonTitle.textAlignment = NSTextAlignmentCenter;
                 [button addSubview:buttonTitle];
@@ -159,6 +159,7 @@
                 button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
                 button.alpha = 0.0;
                 [button setImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
                 //[button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
                 button.translatesAutoresizingMaskIntoConstraints = NO;
                 [self addHeightAndWidthConstrainttoView:button withDimensionParameter:30];
@@ -234,6 +235,26 @@
     }
 }
 
+-(IBAction)buttonSelected:(CustomSexyButton*)sexyOptionsButton {
+    [UIView animateKeyframesWithDuration:1.0 delay:0 options:UIViewKeyframeAnimationOptionCalculationModePaced animations:^{
+        
+        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:0.5 animations:^{
+            CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(sexyOptionsButton.offsetToApply.x, sexyOptionsButton.offsetToApply.y -40);
+            CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1.1, 1.1);
+            sexyOptionsButton.transform = CGAffineTransformConcat(translationTransform, scaleTransform);
+        }];
+        
+        [UIView addKeyframeWithRelativeStartTime:0.5 relativeDuration:1.0 animations:^{
+            CGAffineTransform translationTransform = CGAffineTransformMakeTranslation(sexyOptionsButton.offsetToApply.x,sexyOptionsButton.offsetToApply.y);
+            CGAffineTransform scaleTransform = CGAffineTransformMakeScale(1.0, 1.0);
+            sexyOptionsButton.transform = CGAffineTransformConcat(translationTransform, scaleTransform);
+        }];
+        
+    } completion:^(BOOL finished) {
+        [self removeOverlay];
+    }];
+}
+
 -(void)matchXCenterOfView:(UIView*)childView withXCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
     NSLayoutConstraint* matchingXCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
     [ancestor addConstraint:matchingXCenterConstraint];
@@ -250,7 +271,7 @@
     NSUInteger totalNumberOfElements = self.numberOfOptions;
     BOOL isOdd = (totalNumberOfElements%2 != 0);
     NSUInteger centerIndex = floor(totalNumberOfElements/2);
-    NSUInteger angleScalingFactor = (2*(isOdd)? (totalNumberOfElements -1) : totalNumberOfElements);
+    NSUInteger angleScalingFactor = ((2*(isOdd))? (totalNumberOfElements -1) : totalNumberOfElements);
     CGFloat angleFromCenter = (M_PI/ angleScalingFactor);
     NSInteger startIndex = centerIndex;
     
@@ -271,7 +292,7 @@
             if(!startIndex) {
                 startIndex = 1;
             }
-            NSLog(@"start index %d",startIndex);
+            NSLog(@"start index %ld",(long)startIndex);
         }
     }
     return anglesCollection;
