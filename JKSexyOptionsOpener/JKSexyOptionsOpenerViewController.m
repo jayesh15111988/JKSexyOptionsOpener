@@ -51,13 +51,47 @@
         self.overlayShowHideButton = [[UIButton alloc] initWithFrame:self.openOptionsButton.frame];
         [self.overlayShowHideButton setBackgroundImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
         [self.overlayShowHideButton addTarget:self action:@selector(removeOverlay) forControlEvents:UIControlEventTouchUpInside];
+        
         self.overlayShowHideButton.alpha = 0.0;
         [self.overlayView addSubview:self.overlayShowHideButton];
+        
+        
+        //Add constraint to overlay shadow button
+        self.overlayShowHideButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self matchXCenterOfView:self.overlayShowHideButton withXCenterOfView:self.overlayView andCommonAncestor:self.overlayView];
+        
+        
+        NSLayoutConstraint* bottomSpaceConstraint = [NSLayoutConstraint constraintWithItem:self.overlayView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.overlayShowHideButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:20];
+        
+        [self addHeightAndWidthConstrainttoView:self.overlayShowHideButton withDimensionParameter:30];
+        [self.overlayView addConstraint:bottomSpaceConstraint];
+        
+        
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeOverlayFromParentView:)];
         [self.overlayView addGestureRecognizer:tapRecognizer];
     }
-    return _overlayView;
+    return self.overlayView;
+}
+
+-(void)addHeightAndWidthConstrainttoView:(UIView*)inputView withDimensionParameter:(CGFloat)desiredDimension {
+    
+    NSLayoutConstraint* heightConstraint = [NSLayoutConstraint constraintWithItem:inputView
+                                                                        attribute:NSLayoutAttributeHeight
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:nil
+                                                                        attribute:NSLayoutAttributeNotAnAttribute
+                                                                       multiplier:1
+                                                                         constant:desiredDimension];
+    
+    NSLayoutConstraint* widthConstraint = [NSLayoutConstraint constraintWithItem:inputView
+                                                                       attribute:NSLayoutAttributeWidth
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:nil
+                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                      multiplier:1
+                                                                        constant:desiredDimension];
+    [inputView addConstraints:@[heightConstraint, widthConstraint]];
 }
 
 - (void)removeOverlayFromParentView:(UITapGestureRecognizer*)sender {
@@ -109,11 +143,12 @@
             for(NSInteger optionsCount = 0; optionsCount < anglesCollection.count; optionsCount++) {
                 CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
                 //[button setBackgroundColor:[UIColor redColor]];
+            
                 button.identifier = optionsCount;
                 CGRect originalFrame = button.frame;
                 originalFrame.size.height += 20;
                 button.frame = originalFrame;
-                button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 20, 0);
+                button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
                 UILabel* buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, self.overlayShowHideButton.frame.size.height, self.overlayShowHideButton.frame.size.width, 20)];
                 buttonTitle.text = [NSString stringWithFormat:@"%d", optionsCount];
                 buttonTitle.textColor = [UIColor whiteColor];
@@ -125,7 +160,12 @@
                 button.alpha = 0.0;
                 [button setImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
                 //[button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
+                button.translatesAutoresizingMaskIntoConstraints = NO;
+                [self addHeightAndWidthConstrainttoView:button withDimensionParameter:30];
                 [self.overlayView addSubview:button];
+                [self matchXCenterOfView:button withXCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
+                [self matchYCenterOfView:button withYCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
+                
                 [self.optionButtonsHolder addObject:button];
             }
         }
@@ -134,6 +174,41 @@
             overlayView.alpha = 1.0;
             overlayView.transform = CGAffineTransformMakeScale(1.0, 1.0);
             [self.view addSubview:[self getOverlayView]];
+            
+            //Add constraint to overlayshowHideButton
+            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.overlayView
+                                                                  attribute:NSLayoutAttributeTop
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.view
+                                                                  attribute:NSLayoutAttributeTop
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+            
+            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.overlayView
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.view
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+            
+            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.overlayView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.view
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+            
+            [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.overlayView
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.view
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:0.0]];
+            self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
+            //self.view.translatesAutoresizingMaskIntoConstraints = NO;
         } completion:^(BOOL finished) {
             self.openOptionsButton.alpha = 0.0;
             self.overlayShowHideButton.alpha = 1.0;
@@ -157,6 +232,16 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
         [self removeOverlay];
     }
+}
+
+-(void)matchXCenterOfView:(UIView*)childView withXCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
+    NSLayoutConstraint* matchingXCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [ancestor addConstraint:matchingXCenterConstraint];
+}
+
+-(void)matchYCenterOfView:(UIView*)childView withYCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
+    NSLayoutConstraint* matchingYCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+    [ancestor addConstraint:matchingYCenterConstraint];
 }
 
 -(NSArray*)getAnglesCollectionFromNumberOfOptions {

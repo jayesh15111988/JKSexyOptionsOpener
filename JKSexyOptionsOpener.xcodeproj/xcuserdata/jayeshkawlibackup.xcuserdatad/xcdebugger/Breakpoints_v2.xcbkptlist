@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446616726.921906"
+            timestampString = "446619270.363099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "-openOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446616726.921906"
+            timestampString = "446619270.363099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-openOptionsButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,13 +42,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446616726.921906"
+            timestampString = "446619270.363099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "-openOptionsButtonPressed:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
+            timestampString = "446617740.512397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "openOptionsButton"
+            landmarkType = "19">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JKSexyOptionsOpenerViewController openOptionsButton]"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
+                  timestampString = "446618062.055024"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JKSexyOptionsOpenerViewController setOpenOptionsButton:]"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
+                  timestampString = "446618062.055217"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
