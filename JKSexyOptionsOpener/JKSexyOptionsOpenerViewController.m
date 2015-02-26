@@ -32,9 +32,10 @@
     [super viewDidLoad];
     self.isOptionsOpened = NO;
     self.buttonDimension = 30;
-    self.expansionRadius = self.view.frame.size.width/2;
+    CGFloat dimensionToConsider = MIN(self.view.frame.size.width, self.view.frame.size.height);
+    self.expansionRadius = dimensionToConsider/2;
     self.numberOfOptions = 5;
-    NSInteger maximumExpansionRadius = ((self.view.frame.size.width/2) - self.buttonDimension);
+    NSInteger maximumExpansionRadius = (self.expansionRadius - self.buttonDimension);
     if(self.expansionRadius > maximumExpansionRadius) {
         self.expansionRadius = maximumExpansionRadius;
     }
@@ -43,7 +44,7 @@
 -(UIView*)getOverlayView {
     if(!self.overlayView) {
         self.overlayView = [[UIView alloc] initWithFrame:self.view.frame];
-        self.overlayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.8];
+        self.overlayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
         self.overlayView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         self.overlayView.alpha = 0.0;
         
@@ -78,18 +79,20 @@
                                                  repeats:YES];
     
     
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION delay:0.2* (self.numberOfOptions - 1)
+    [UIView animateWithDuration:0.2*(self.numberOfOptions + 1) delay:0
          usingSpringWithDamping:0.7 initialSpringVelocity:5.0f
                         options:0 animations:^{
-                            self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
+                            self.openOptionsButton.transform = CGAffineTransformMakeRotation(M_PI);
                         } completion:^(BOOL finished) {
-                            [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
-                                self.overlayView.alpha = 0.0;
-                                self.overlayView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-                            } completion:^(BOOL finished) {
-                                [self.overlayView removeFromSuperview];
-                            }];
-                        }];
+        }];
+    
+    [UIView animateWithDuration:0.5 delay:0.2*(self.numberOfOptions + 1) options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.overlayView.alpha = 0.0;
+        self.overlayView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    } completion:^(BOOL finished) {
+        [self.overlayView removeFromSuperview];
+        self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
+    }];
 }
 
 - (IBAction)openOptionsButtonPressed:(UIButton*)sender {
@@ -99,6 +102,7 @@
         UIView* overlayView = [self getOverlayView];
         
         if(!self.optionButtonsHolder) {
+            self.isOptionsOpened = !self.isOptionsOpened;
             self.optionButtonsHolder = [NSMutableArray new];
             
             NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
@@ -144,14 +148,15 @@
                  usingSpringWithDamping:0.35 initialSpringVelocity:5.0f
                                 options:0 animations:^{
                                     self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(M_PI);
-                                } completion:nil];
+                                } completion:^(BOOL finished) {
+                                    self.openOptionsButton.transform = CGAffineTransformIdentity;
+                                }];
             
         }];
     } else {
         [sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
         [self removeOverlay];
     }
-    self.isOptionsOpened = !self.isOptionsOpened;
 }
 
 -(NSArray*)getAnglesCollectionFromNumberOfOptions {
