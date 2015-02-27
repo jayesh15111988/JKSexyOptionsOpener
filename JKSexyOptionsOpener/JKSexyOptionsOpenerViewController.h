@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^OptionSelected)(NSUInteger optionSelected);
+typedef void (^OperationCanceled)();
+
 @interface JKSexyOptionsOpenerViewController : UIViewController
+
+@property (strong, nonatomic) OptionSelected SelectedOptionBlock;
+@property (strong, nonatomic) OperationCanceled OperationCancelBlock;
 
 @end

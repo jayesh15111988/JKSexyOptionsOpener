@@ -10,12 +10,13 @@
 #import "CustomSexyButton.h"
 
 #define DEFAULT_ANIMATION_DURATION 0.5
-#define LONGER_ANIMATION_DURATION 0.5
+#define LONGER_ANIMATION_DURATION 1.0
 
 @interface JKSexyOptionsOpenerViewController ()
 @property (assign) BOOL isOptionsOpened;
 @property (strong) UIView* overlayView;
 @property (weak, nonatomic) IBOutlet UIButton *openOptionsButton;
+@property (strong, nonatomic) UIButton* topCloseOverlayButton;
 @property (strong) UIButton* overlayShowHideButton;
 @property (assign) CGFloat expansionRadius;
 @property (assign) NSInteger numberOfOptions;
@@ -44,6 +45,7 @@
 -(UIView*)getOverlayView {
     if(!self.overlayView) {
         self.overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        
         self.overlayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
         self.overlayView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         self.overlayView.alpha = 0.0;
@@ -56,6 +58,20 @@
         [self.overlayView addSubview:self.overlayShowHideButton];
         
         
+        self.topCloseOverlayButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [self.topCloseOverlayButton setBackgroundImage:[UIImage imageNamed:@"close-button.png"] forState:UIControlStateNormal];
+        self.topCloseOverlayButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.topCloseOverlayButton addTarget:self action:@selector(removeOverlayFromTopCloseButton:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.overlayView addSubview:self.topCloseOverlayButton];
+        [self addHeightAndWidthConstrainttoView:self.topCloseOverlayButton withDimensionParameter:30];
+        
+        //Add top space constraint from super view
+        NSLayoutConstraint* topSpaceConstraint = [NSLayoutConstraint constraintWithItem:self.topCloseOverlayButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.overlayView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+        
+        //Add left space constraint from super view
+        NSLayoutConstraint* leftSpaceConstraint = [NSLayoutConstraint constraintWithItem:self.topCloseOverlayButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.overlayView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+        
         //Add constraint to overlay shadow button
         self.overlayShowHideButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self matchXCenterOfView:self.overlayShowHideButton withXCenterOfView:self.overlayView andCommonAncestor:self.overlayView];
@@ -65,13 +81,28 @@
         
         [self addHeightAndWidthConstrainttoView:self.overlayShowHideButton withDimensionParameter:30];
         [self.overlayView addConstraint:bottomSpaceConstraint];
+        [self.overlayView addConstraint:topSpaceConstraint];
+        [self.overlayView addConstraint:leftSpaceConstraint];
         
         
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeOverlayFromParentView:)];
         [self.overlayView addGestureRecognizer:tapRecognizer];
     }
+    self.topCloseOverlayButton.transform = CGAffineTransformIdentity;
     return self.overlayView;
+}
+
+
+-(IBAction)removeOverlayFromTopCloseButton:(UIButton*)topCloseButton {
+    //Add animation to top close button as soon as it is pressed
+    [UIView animateWithDuration:1.0 animations:^{
+        CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.1, 0.1);
+        CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(M_PI);
+        self.topCloseOverlayButton.transform = CGAffineTransformConcat(scaleTransform, rotationTransform);
+    }];
+    
+    [self removeOverlay];
 }
 
 -(void)addHeightAndWidthConstrainttoView:(UIView*)inputView withDimensionParameter:(CGFloat)desiredDimension {
@@ -126,6 +157,9 @@
     } completion:^(BOOL finished) {
         [self.overlayView removeFromSuperview];
         self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
+        if(self.OperationCancelBlock) {
+            self.OperationCancelBlock();
+        }
     }];
 }
 
@@ -136,7 +170,6 @@
         UIView* overlayView = [self getOverlayView];
         
         if(!self.optionButtonsHolder) {
-            self.isOptionsOpened = !self.isOptionsOpened;
             self.optionButtonsHolder = [NSMutableArray new];
             
             NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
@@ -183,7 +216,7 @@
                                                                      toItem:self.view
                                                                   attribute:NSLayoutAttributeTop
                                                                  multiplier:1.0
-                                                                   constant:0.0]];
+                                                                   constant:20.0]];
             
             [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.overlayView
                                                                   attribute:NSLayoutAttributeLeading
@@ -233,6 +266,7 @@
         [sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
         [self removeOverlay];
     }
+    self.isOptionsOpened = !self.isOptionsOpened;
 }
 
 -(IBAction)buttonSelected:(CustomSexyButton*)sexyOptionsButton {
@@ -252,6 +286,10 @@
         
     } completion:^(BOOL finished) {
         [self removeOverlay];
+        if(self.SelectedOptionBlock) {
+            sexyOptionsButton.isButtonSelected = YES;
+            self.SelectedOptionBlock(sexyOptionsButton.identifier);
+        }
     }];
 }
 

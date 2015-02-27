@@ -22,6 +22,7 @@
 		383B83581A9AA27500A23D01 /* yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83521A9AA27500A23D01 /* yellow.png */; };
 		383B83591A9AA27500A23D01 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83531A9AA27500A23D01 /* blue.png */; };
 		383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */; };
+		3873E23D1A9F559B002ADDB4 /* close-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3873E23C1A9F559B002ADDB4 /* close-button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		383B83531A9AA27500A23D01 /* blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blue.png; sourceTree = "<group>"; };
 		383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSexyButton.h; sourceTree = "<group>"; };
 		383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSexyButton.m; sourceTree = "<group>"; };
+		3873E23C1A9F559B002ADDB4 /* close-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-button.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				383B834E1A9AA27500A23D01 /* red.png */,
 				383B834F1A9AA27500A23D01 /* gray.png */,
 				383B83501A9AA27500A23D01 /* green.png */,
+				3873E23C1A9F559B002ADDB4 /* close-button.png */,
 				383B83511A9AA27500A23D01 /* orange.png */,
 				383B83521A9AA27500A23D01 /* yellow.png */,
 				383B83531A9AA27500A23D01 /* blue.png */,
@@ -240,6 +243,7 @@
 				383B832B1A9A975E00A23D01 /* Main.storyboard in Resources */,
 				383B834C1A9A9C7500A23D01 /* rf.jpg in Resources */,
 				383B83551A9AA27500A23D01 /* gray.png in Resources */,
+				3873E23D1A9F559B002ADDB4 /* close-button.png in Resources */,
 				383B83301A9A975E00A23D01 /* LaunchScreen.xib in Resources */,
 				383B83541A9AA27500A23D01 /* red.png in Resources */,
 				383B832D1A9A975E00A23D01 /* Images.xcassets in Resources */,
@@ -456,6 +460,7 @@
 				383B83411A9A975E00A23D01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		383B83421A9A975E00A23D01 /* Build configuration list for PBXNativeTarget "JKSexyOptionsOpenerTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +469,7 @@
 				383B83441A9A975E00A23D01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
