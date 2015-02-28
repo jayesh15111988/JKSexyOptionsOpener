@@ -31,6 +31,7 @@ typedef void (^OptionNotSelected)();
 
 @property (strong) UIColor* optionsLabelTextColor;
 @property (strong) UIFont* defaultTextFont;
+@property (strong) UIColor* overlayBackgroundColor;
 
 @property (strong) NSString* mainOptionsButtonTitle;
 @property (strong) NSString* mainOptionsButtonBackgroundImageName;

@@ -46,7 +46,7 @@
     self.optionsCollection = options;
     self.numberOfOptions = self.optionsCollection.count;
     NSAssert(self.numberOfOptions > 0, @"Number Of options must be positive number");
-    
+    self.overlayBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     CGFloat dimensionToConsider = MIN(self.parentController.view.frame.size.width, self.parentController.view.frame.size.height);
     self.mainOptionsButtonBackgroundImageName = @"yellow.png";
     self.mainOptionsButtonTitle = @"Main";
@@ -91,7 +91,7 @@
         self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
         
         if(self.overlayviewBackgroundEffect == Transparent) {
-            self.overlayView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+            self.overlayView.backgroundColor = self.overlayBackgroundColor;
         } else if (self.overlayviewBackgroundEffect == Blurred) {
             [self.overlayView addSubview:[self getBlurredBackgroundView]];
         }
