@@ -65,6 +65,36 @@
             endingLineNumber = "360"
             landmarkName = "-buttonSelected:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[JKSexyOptionsOpenerViewController buttonSelected:]_block_invoke"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
+                  timestampString = "446849351.293987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "47">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__52-[JKSexyOptionsOpenerViewController buttonSelected:]_block_invoke_2"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
+                  timestampString = "446849351.294206"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -121,11 +151,11 @@
                   symbolName = "-[JKAnimatedOptionsOpenerView removeOverlayFromTopCloseButton:]"
                   moduleName = "JKSexyOptionsOpener"
                   urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-                  timestampString = "446844943.618588"
+                  timestampString = "446849351.420932"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
                   offsetFromSymbolStart = "71">
                </Location>
                <Location
@@ -135,11 +165,11 @@
                   symbolName = "__63-[JKAnimatedOptionsOpenerView removeOverlayFromTopCloseButton:]_block_invoke"
                   moduleName = "JKSexyOptionsOpener"
                   urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-                  timestampString = "446844943.618858"
+                  timestampString = "446849351.421271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "148"
-                  endingLineNumber = "148"
+                  startingLineNumber = "158"
+                  endingLineNumber = "158"
                   offsetFromSymbolStart = "27">
                </Location>
             </Locations>
@@ -183,11 +213,11 @@
                   symbolName = "-[JKAnimatedOptionsOpenerView removeOverlayWithDelay:andCompletion:]"
                   moduleName = "JKSexyOptionsOpener"
                   urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-                  timestampString = "446844943.703555"
+                  timestampString = "446849351.466447"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
+                  startingLineNumber = "213"
+                  endingLineNumber = "213"
                   offsetFromSymbolStart = "720">
                </Location>
                <Location
@@ -197,11 +227,11 @@
                   symbolName = "__68-[JKAnimatedOptionsOpenerView removeOverlayWithDelay:andCompletion:]_block_invoke_2"
                   moduleName = "JKSexyOptionsOpener"
                   urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-                  timestampString = "446844943.70385"
+                  timestampString = "446849351.466701"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "199"
-                  endingLineNumber = "199"
+                  startingLineNumber = "213"
+                  endingLineNumber = "213"
                   offsetFromSymbolStart = "15">
                </Location>
             </Locations>
