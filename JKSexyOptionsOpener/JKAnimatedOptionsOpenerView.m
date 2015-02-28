@@ -1,21 +1,19 @@
 //
-//  JKSexyOptionsOpenerViewController.m
+//  JKAnimatedOptionsOpenerView.m
 //  JKSexyOptionsOpener
 //
-//  Created by Jayesh Kawli Backup on 2/22/15.
+//  Created by Jayesh Kawli Backup on 2/27/15.
 //  Copyright (c) 2015 Jayesh Kawli Backup. All rights reserved.
 //
 
-#import "JKSexyOptionsOpenerViewController.h"
+#import "JKAnimatedOptionsOpenerView.h"
 #import "CustomSexyButton.h"
 
 #define DEFAULT_ANIMATION_DURATION 0.5
 #define LONGER_ANIMATION_DURATION 1.0
 
-typedef void (^OptionSelected)(NSUInteger optionSelected);
-typedef void (^OperationCanceled)();
+@interface JKAnimatedOptionsOpenerView ()
 
-@interface JKSexyOptionsOpenerViewController ()
 @property (assign) BOOL isOptionsOpened;
 @property (strong) UIView* overlayView;
 @property (weak, nonatomic) IBOutlet UIButton *openOptionsButton;
@@ -30,34 +28,17 @@ typedef void (^OperationCanceled)();
 @property (assign) NSInteger counter;
 @property (strong) UIFont* defaultTextFont;
 @property (strong) UIView* blurredView;
-@property (strong) JKAnimatedOptionsOpenerView* jkAnimatedViewInstance;
-@property (strong) UIView* animatedView;
+@property (strong) UIViewController* parentController;
 
 @end
 
-@implementation JKSexyOptionsOpenerViewController
+@implementation JKAnimatedOptionsOpenerView
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+-(instancetype)initWithParentController:(UIViewController*)parentViewController {
+    
+    self.parentController = parentViewController;
     self.isOptionsOpened = NO;
     self.buttonDimension = 30;
-    //Create an instance
-    self.jkAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self];
-    
-    //Setup parameters to use with this overlay
-    self.jkAnimatedViewInstance.overlayviewBackgroundEffect = TransparentBackgroundEffect;
-    
-    //Create an actual view
-    [self.jkAnimatedViewInstance createAndSetupOverlayView];
-    
-    self.jkAnimatedViewInstance.SelectedOptionBlock = ^(NSUInteger optionSelected) {
-        NSLog(@"Selected options is %lu", optionSelected);
-    };
-    
-    self.jkAnimatedViewInstance.OperationCancelBlock = ^() {
-        NSLog(@"Operation cancalled");
-    };
-    
     self.overlayviewBackgroundEffect = BlurredBackgroundEffect;//TransparentBackgroundEffect;
     self.defaultTextFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
     
@@ -67,35 +48,29 @@ typedef void (^OperationCanceled)();
         self.optionsLabelTextColor = [UIColor blackColor];
     }
     
-    CGFloat dimensionToConsider = MIN(self.view.frame.size.width, self.view.frame.size.height);
+    CGFloat dimensionToConsider = MIN(self.parentController.view.frame.size.width, self.parentController.view.frame.size.height);
     self.expansionRadius = dimensionToConsider/2;
     self.numberOfOptions = 3;
     NSInteger maximumExpansionRadius = (self.expansionRadius - (self.buttonDimension));
     if(self.expansionRadius > maximumExpansionRadius) {
         self.expansionRadius = maximumExpansionRadius;
     }
+    return self;
 }
 
--(UIView*)getBlurredBackgroundView {
-    if(!self.blurredView) {
-        UIBlurEffect * effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-        UIVisualEffectView * viewWithBlurredBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
-        viewWithBlurredBackground.frame = self.view.frame;
+-(void)createAndSetupOverlayView {
+    [self getOverlayView];
+    [self.parentController.view addSubview:self.overlayView];
+    [self addConstraintToView:self.overlayView relativeToSuperview:self.parentController.view withTopOffset:20.0];
     
-        //UIVisualEffectView * viewInducingVibrancy = [[UIVisualEffectView alloc] initWithEffect:effect];
-        //[viewWithBlurredBackground addSubview:viewInducingVibrancy];
-        //UILabel * vibrantLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
-        //vibrantLabel.text = @"Vibrancy and Blur Effects Simplified";
-        //[viewInducingVibrancy addSubview:vibrantLabel];
-        self.blurredView = viewWithBlurredBackground;
-        self.blurredView.translatesAutoresizingMaskIntoConstraints = NO;
+    if(self.overlayviewBackgroundEffect == BlurredBackgroundEffect) {
+        [self addConstraintToView:self.blurredView relativeToSuperview:self.overlayView withTopOffset:0.0];
     }
-    return self.blurredView;
 }
 
 -(UIView*)getOverlayView {
     if(!self.overlayView) {
-        self.overlayView = [[UIView alloc] initWithFrame:self.view.frame];
+        self.overlayView = [[UIView alloc] initWithFrame:self.parentController.view.frame];
         
         self.overlayView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         self.overlayView.alpha = 0.0;
@@ -151,6 +126,9 @@ typedef void (^OperationCanceled)();
     return self.overlayView;
 }
 
+- (void)doit {
+    
+}
 
 -(IBAction)removeOverlayFromTopCloseButton:(UIButton*)topCloseButton {
     //Add animation to top close button as soon as it is pressed
@@ -161,6 +139,81 @@ typedef void (^OperationCanceled)();
     }];
     [self removeOverlay];
 }
+
+- (void)removeOverlayFromParentView:(UITapGestureRecognizer*)sender {
+    [self removeOverlay];
+}
+
+-(UIView*)getBlurredBackgroundView {
+    if(!self.blurredView) {
+        UIBlurEffect * effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView * viewWithBlurredBackground = [[UIVisualEffectView alloc] initWithEffect:effect];
+        viewWithBlurredBackground.frame = self.parentController.view.frame;
+        
+        //UIVisualEffectView * viewInducingVibrancy = [[UIVisualEffectView alloc] initWithEffect:effect];
+        //[viewWithBlurredBackground addSubview:viewInducingVibrancy];
+        //UILabel * vibrantLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 200, 50)];
+        //vibrantLabel.text = @"Vibrancy and Blur Effects Simplified";
+        //[viewInducingVibrancy addSubview:vibrantLabel];
+        self.blurredView = viewWithBlurredBackground;
+        self.blurredView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    return self.blurredView;
+}
+
+-(void)removeOverlay {
+    NSLog(@"Cancel button pressed on the overlay view");
+    self.isOptionsOpened = !self.isOptionsOpened;
+    self.overlayShowHideButton.alpha = 1.0;
+    self.openOptionsButton.alpha = 1.0;
+    [self.openOptionsButton setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
+    
+    [self.parentController.view addSubview:self.openOptionsButton];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
+                                                  target:self
+                                                selector:@selector(closeOptions:)
+                                                userInfo:nil
+                                                 repeats:YES];
+    
+    
+    [UIView animateWithDuration:0.2*(self.numberOfOptions + 1) delay:0
+         usingSpringWithDamping:0.7 initialSpringVelocity:5.0f
+                        options:0 animations:^{
+                            self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
+                        } completion:^(BOOL finished) {
+                        }];
+    
+    [UIView animateWithDuration:0.5 delay:0.2*(self.numberOfOptions + 1) options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.overlayView.alpha = 0.0;
+        self.overlayView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    } completion:^(BOOL finished) {
+        [self.overlayView removeFromSuperview];
+        self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
+        if(self.OperationCancelBlock) {
+            self.OperationCancelBlock();
+        }
+    }];
+}
+
+- (void)closeOptions:(NSTimer *)timer {
+    
+    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter--];
+    
+    [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+         usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
+                        options:0 animations:^{
+                            individualButton.alpha = 0.0;
+                            individualButton.transform = CGAffineTransformMakeTranslation(0, 0);
+                        } completion:nil];
+    
+    if(self.counter < 0) {
+        self.counter = 0;
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
 
 -(void)addHeightAndWidthConstrainttoView:(UIView*)inputView withDimensionParameter:(CGFloat)desiredDimension {
     
@@ -182,137 +235,20 @@ typedef void (^OperationCanceled)();
     [inputView addConstraints:@[heightConstraint, widthConstraint]];
 }
 
-- (void)removeOverlayFromParentView:(UITapGestureRecognizer*)sender {
-    [self removeOverlay];
+
+-(void)matchXCenterOfView:(UIView*)childView withXCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
+    NSLayoutConstraint* matchingXCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+    [ancestor addConstraint:matchingXCenterConstraint];
 }
 
--(void)removeOverlay {
-    NSLog(@"Cancel button pressed on the overlay view");
-    self.isOptionsOpened = !self.isOptionsOpened;
-    self.overlayShowHideButton.alpha = 0.0;
-    self.openOptionsButton.alpha = 1.0;
-    [self.openOptionsButton setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
-    
-    [self.view addSubview:self.openOptionsButton];
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
-                                                  target:self
-                                                selector:@selector(closeOptions:)
-                                                userInfo:nil
-                                                 repeats:YES];
-    
-    
-    [UIView animateWithDuration:0.2*(self.numberOfOptions + 1) delay:0
-         usingSpringWithDamping:0.7 initialSpringVelocity:5.0f
-                        options:0 animations:^{
-                            self.openOptionsButton.transform = CGAffineTransformMakeRotation(M_PI);
-                        } completion:^(BOOL finished) {
-        }];
-    
-    [UIView animateWithDuration:0.5 delay:0.2*(self.numberOfOptions + 1) options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.overlayView.alpha = 0.0;
-        self.overlayView.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    } completion:^(BOOL finished) {
-        [self.overlayView removeFromSuperview];
-        self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
-        if(self.OperationCancelBlock) {
-            self.OperationCancelBlock();
-        }
-    }];
-}
-
-- (IBAction)openOptionsButtonPressed:(UIButton*)sender {
-    
-    
-    
-    [self.jkAnimatedViewInstance openOptionsView];
-    
-    /*if(!self.isOptionsOpened) {
-        
-        [sender setBackgroundImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
-        UIView* overlayView = [self getOverlayView];
-        
-        if(!self.optionButtonsHolder) {
-            self.optionButtonsHolder = [NSMutableArray new];
-            
-            NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
-            for(NSInteger optionsCount = 0; optionsCount < anglesCollection.count; optionsCount++) {
-                CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
-                //[button setBackgroundColor:[UIColor redColor]];
-            
-                button.identifier = optionsCount;
-                CGRect originalFrame = button.frame;
-                originalFrame.size.height += 20;
-                button.frame = originalFrame;
-                button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-                UILabel* buttonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(-15, self.overlayShowHideButton.frame.size.height, 2 * self.overlayShowHideButton.frame.size.width, 30)];
-
-                buttonTitleLabel.text = [NSString stringWithFormat:@"%ld", (long)optionsCount];
-
-                buttonTitleLabel.textColor = self.optionsLabelTextColor;
-                buttonTitleLabel.font = self.defaultTextFont;
-                buttonTitleLabel.numberOfLines = 0;
-                buttonTitleLabel.textAlignment = NSTextAlignmentCenter;
-                [button addSubview:buttonTitleLabel];
-                CGFloat currentAngleValue = [anglesCollection[optionsCount] floatValue];
-                button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
-                button.alpha = 0.0;
-                [button setImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-                //[button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
-                button.translatesAutoresizingMaskIntoConstraints = NO;
-                
-                [self addHeightAndWidthConstrainttoView:button withDimensionParameter:30];
-                [self.overlayView addSubview:button];
-                [self matchXCenterOfView:button withXCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
-                [self matchYCenterOfView:button withYCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
-                
-                [self.optionButtonsHolder addObject:button];
-            }
-        }
-        
-        [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
-            overlayView.alpha = 1.0;
-            overlayView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-            [self.view addSubview:[self getOverlayView]];
-            
-            [self addConstraintToView:self.overlayView relativeToSuperview:self.view withTopOffset:20.0];
-            
-            if(self.overlayviewBackgroundEffect == BlurredBackgroundEffect) {
-                [self addConstraintToView:self.blurredView relativeToSuperview:self.overlayView withTopOffset:0.0];
-            }
-            
-        
-        } completion:^(BOOL finished) {
-            self.openOptionsButton.alpha = 0.0;
-            self.overlayShowHideButton.alpha = 1.0;
-            
-            self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
-                                                          target:self
-                                                        selector:@selector(openOptions:)
-                                                        userInfo:nil
-                                                         repeats:YES];
-            
-            [UIView animateWithDuration:0.2* (self.numberOfOptions - 1) delay:0
-                 usingSpringWithDamping:0.35 initialSpringVelocity:5.0f
-                                options:0 animations:^{
-                                    self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(M_PI);
-                                } completion:^(BOOL finished) {
-                                    self.openOptionsButton.transform = CGAffineTransformIdentity;
-                                }];
-            
-        }];
-    } else {
-        [sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
-        [self removeOverlay];
-    }
-    self.isOptionsOpened = !self.isOptionsOpened; */
-    
+-(void)matchYCenterOfView:(UIView*)childView withYCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
+    NSLayoutConstraint* matchingYCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+    [ancestor addConstraint:matchingYCenterConstraint];
 }
 
 -(void)addConstraintToView:(UIView*)childView relativeToSuperview:(UIView*)parentView withTopOffset:(CGFloat)topOffset {
     //Add constraint to overlayshowHideButton
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
+    [self.parentController.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:parentView
@@ -320,7 +256,7 @@ typedef void (^OperationCanceled)();
                                                          multiplier:1.0
                                                            constant:topOffset]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
+    [self.parentController.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
                                                           attribute:NSLayoutAttributeLeading
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:parentView
@@ -328,7 +264,7 @@ typedef void (^OperationCanceled)();
                                                          multiplier:1.0
                                                            constant:0.0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
+    [self.parentController.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
                                                           attribute:NSLayoutAttributeBottom
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:parentView
@@ -336,7 +272,7 @@ typedef void (^OperationCanceled)();
                                                          multiplier:1.0
                                                            constant:0.0]];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
+    [self.parentController.view addConstraint:[NSLayoutConstraint constraintWithItem:childView
                                                           attribute:NSLayoutAttributeTrailing
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:parentView
@@ -344,6 +280,109 @@ typedef void (^OperationCanceled)();
                                                          multiplier:1.0
                                                            constant:0.0]];
 }
+
+- (void)openOptionsView {
+    
+    if(!self.isOptionsOpened) {
+     
+     //[sender setBackgroundImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
+     UIView* overlayView = [self getOverlayView];
+     
+     if(!self.optionButtonsHolder) {
+     self.optionButtonsHolder = [NSMutableArray new];
+     
+     NSArray* anglesCollection = [self getAnglesCollectionFromNumberOfOptions];
+     for(NSInteger optionsCount = 0; optionsCount < anglesCollection.count; optionsCount++) {
+     CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
+     //[button setBackgroundColor:[UIColor redColor]];
+     
+     button.identifier = optionsCount;
+     CGRect originalFrame = button.frame;
+     originalFrame.size.height += 20;
+     button.frame = originalFrame;
+     button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+     UILabel* buttonTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(-15, self.overlayShowHideButton.frame.size.height, 2 * self.overlayShowHideButton.frame.size.width, 30)];
+     
+     buttonTitleLabel.text = [NSString stringWithFormat:@"%ld", (long)optionsCount];
+     
+     buttonTitleLabel.textColor = self.optionsLabelTextColor;
+     buttonTitleLabel.font = self.defaultTextFont;
+     buttonTitleLabel.numberOfLines = 0;
+     buttonTitleLabel.textAlignment = NSTextAlignmentCenter;
+     [button addSubview:buttonTitleLabel];
+     CGFloat currentAngleValue = [anglesCollection[optionsCount] floatValue];
+     button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
+     button.alpha = 0.0;
+     [button setImage:[UIImage imageNamed:@"red.png"] forState:UIControlStateNormal];
+     [button addTarget:self action:@selector(buttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+     //[button setTitle:[NSString stringWithFormat:@"%d", optionsCount] forState:UIControlStateNormal];
+     button.translatesAutoresizingMaskIntoConstraints = NO;
+     
+     [self addHeightAndWidthConstrainttoView:button withDimensionParameter:30];
+     [self.overlayView addSubview:button];
+     [self matchXCenterOfView:button withXCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
+     [self matchYCenterOfView:button withYCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
+     
+     [self.optionButtonsHolder addObject:button];
+     }
+     }
+     
+     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
+     overlayView.alpha = 1.0;
+     overlayView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+     [self.parentController.view addSubview:overlayView];
+     
+     [self addConstraintToView:self.overlayView relativeToSuperview:self.parentController.view withTopOffset:20.0];
+     
+     if(self.overlayviewBackgroundEffect == BlurredBackgroundEffect) {
+     [self addConstraintToView:self.blurredView relativeToSuperview:self.overlayView withTopOffset:0.0];
+     }
+     
+     
+     } completion:^(BOOL finished) {
+     self.openOptionsButton.alpha = 0.0;
+     self.overlayShowHideButton.alpha = 1.0;
+     
+     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20
+     target:self
+     selector:@selector(openOptions:)
+     userInfo:nil
+     repeats:YES];
+     
+     [UIView animateWithDuration:0.2* (self.numberOfOptions - 1) delay:0
+     usingSpringWithDamping:0.35 initialSpringVelocity:5.0f
+     options:0 animations:^{
+     self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(M_PI);
+     } completion:^(BOOL finished) {
+     self.openOptionsButton.transform = CGAffineTransformIdentity;
+     }];
+     
+     }];
+     } else {
+         //[sender setBackgroundImage:[UIImage imageNamed:@"green.png"] forState:UIControlStateNormal];
+         [self removeOverlay];
+     }
+    self.isOptionsOpened = !self.isOptionsOpened;
+}
+
+- (void)openOptions:(NSTimer *)timer {
+    
+    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter++];
+    
+    [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
+         usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
+                        options:0 animations:^{
+                            individualButton.alpha = 1.0;
+                            individualButton.transform = CGAffineTransformMakeTranslation(individualButton.offsetToApply.x, individualButton.offsetToApply.y);
+                        } completion:nil];
+    
+    if(self.counter >= [self.optionButtonsHolder count]) {
+        self.counter -= 1;
+        [self.timer invalidate];
+        self.timer = nil;
+    }
+}
+
 
 -(IBAction)buttonSelected:(CustomSexyButton*)sexyOptionsButton {
     NSLog(@"Option Sequence %ld selected", sexyOptionsButton.identifier);
@@ -368,16 +407,6 @@ typedef void (^OperationCanceled)();
             self.SelectedOptionBlock(sexyOptionsButton.identifier);
         }
     }];
-}
-
--(void)matchXCenterOfView:(UIView*)childView withXCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
-    NSLayoutConstraint* matchingXCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
-    [ancestor addConstraint:matchingXCenterConstraint];
-}
-
--(void)matchYCenterOfView:(UIView*)childView withYCenterOfView:(UIView*)parentView andCommonAncestor:(UIView*)ancestor{
-    NSLayoutConstraint* matchingYCenterConstraint = [NSLayoutConstraint constraintWithItem:childView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:parentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
-    [ancestor addConstraint:matchingYCenterConstraint];
 }
 
 -(NSArray*)getAnglesCollectionFromNumberOfOptions {
@@ -412,40 +441,6 @@ typedef void (^OperationCanceled)();
     return anglesCollection;
 }
 
-- (void)openOptions:(NSTimer *)timer {
-    
-    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter++];
-    
-        [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
-             usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
-                            options:0 animations:^{
-                                individualButton.alpha = 1.0;
-                                individualButton.transform = CGAffineTransformMakeTranslation(individualButton.offsetToApply.x, individualButton.offsetToApply.y);
-                            } completion:nil];
-    
-    if(self.counter >= [self.optionButtonsHolder count]) {
-        self.counter -= 1;
-        [self.timer invalidate];
-        self.timer = nil;
-    }
-}
 
-- (void)closeOptions:(NSTimer *)timer {
-    
-    CustomSexyButton* individualButton = self.optionButtonsHolder[self.counter--];
-    
-    [UIView animateWithDuration:LONGER_ANIMATION_DURATION delay:0
-         usingSpringWithDamping:0.5 initialSpringVelocity:5.0f
-                        options:0 animations:^{
-                            individualButton.alpha = 0.0;
-                            individualButton.transform = CGAffineTransformMakeTranslation(0, 0);
-                        } completion:nil];
-    
-    if(self.counter < 0) {
-        self.counter = 0;
-        [self.timer invalidate];
-        self.timer = nil;
-    }
-}
 
 @end

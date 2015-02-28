@@ -23,6 +23,7 @@
 		383B83591A9AA27500A23D01 /* blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83531A9AA27500A23D01 /* blue.png */; };
 		383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */; };
 		3873E23D1A9F559B002ADDB4 /* close-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3873E23C1A9F559B002ADDB4 /* close-button.png */; };
+		389815471AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,8 @@
 		383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSexyButton.h; sourceTree = "<group>"; };
 		383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSexyButton.m; sourceTree = "<group>"; };
 		3873E23C1A9F559B002ADDB4 /* close-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-button.png"; sourceTree = "<group>"; };
+		389815451AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKAnimatedOptionsOpenerView.h; sourceTree = "<group>"; };
+		389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKAnimatedOptionsOpenerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,8 @@
 				383B832E1A9A975E00A23D01 /* LaunchScreen.xib */,
 				383B83481A9A991500A23D01 /* JKSexyOptionsOpenerViewController.h */,
 				383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */,
+				389815451AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.h */,
+				389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */,
 				383B831F1A9A975E00A23D01 /* Supporting Files */,
 				383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */,
 				383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */,
@@ -268,6 +273,7 @@
 				383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */,
 				383B83221A9A975E00A23D01 /* main.m in Sources */,
 				383B834A1A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m in Sources */,
+				389815471AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
