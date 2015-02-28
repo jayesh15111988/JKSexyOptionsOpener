@@ -9,8 +9,11 @@
 #import "JKAnimatedOptionsOpenerView.h"
 #import "CustomSexyButton.h"
 
-#define DEFAULT_ANIMATION_DURATION 0.5
+#define SMALL_ANIMATION_DURATION 0.2
+#define MEDIUM_ANIMATION_DURATION 0.6
 #define LONGER_ANIMATION_DURATION 1.0
+
+#define DEFAULT_LABEL_WIDTH 60
 
 @interface JKAnimatedOptionsOpenerView ()
 
@@ -97,21 +100,20 @@
         [self.overlayShowHideButton setBackgroundImage:[UIImage imageNamed:self.mainOptionsButtonBackgroundImageName] forState:UIControlStateNormal];
         [self.overlayShowHideButton addTarget:self action:@selector(removeOverLayWithAnimation) forControlEvents:UIControlEventTouchUpInside];
         self.overlayShowHideButton.alpha = 0.0;
+        self.overlayShowHideButton.titleLabel.font = self.defaultTextFont;
         
-        UILabel* mainButtonTitleLabel = [self createAndGetLabelForOptionsButtonWithFrame:CGRectMake(self.overlayShowHideButton.frame.origin.x - 15, self.overlayShowHideButton.frame.origin.y + self.overlayShowHideButton.frame.size.height, self.overlayShowHideButton.frame.size.width * 2, 30) andText:self.mainOptionsButtonTitle];
+        UILabel* mainButtonTitleLabel = [self createAndGetLabelForOptionsButtonWithFrame:CGRectMake(self.overlayShowHideButton.frame.origin.x, self.overlayShowHideButton.frame.origin.y + self.overlayShowHideButton.frame.size.height, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_WIDTH/2) andText:self.mainOptionsButtonTitle];
         
         mainButtonTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self.overlayView addSubview:self.overlayShowHideButton];
         [self.overlayView addSubview:mainButtonTitleLabel];
         
-        [self matchXCenterOfView:mainButtonTitleLabel withXCenterOfView:self.overlayShowHideButton andCommonAncestor:self.overlayView];
-        [self addHeightAndWidthConstrainttoView:mainButtonTitleLabel withHeightParameter:mainButtonTitleLabel.frame.size.height andWidthParameter:mainButtonTitleLabel.frame.size.width];
         
-        NSLayoutConstraint* mainButtonTopSpaceConstraint = [NSLayoutConstraint constraintWithItem:mainButtonTitleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.overlayShowHideButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5];
-        [self.overlayView addConstraint:mainButtonTopSpaceConstraint];
+        [self addTopSpacingConstraintWithTopView:self.overlayShowHideButton andBottomView:mainButtonTitleLabel andCommonAncestor:self.overlayView];
         
-        self.topCloseOverlayButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        
+        self.topCloseOverlayButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, DEFAULT_LABEL_WIDTH/2, DEFAULT_LABEL_WIDTH/2)];
         [self.topCloseOverlayButton setBackgroundImage:[UIImage imageNamed:@"close-button.png"] forState:UIControlStateNormal];
         self.topCloseOverlayButton.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -143,10 +145,17 @@
     }
 }
 
+-(void)addTopSpacingConstraintWithTopView:(UIView*)topView andBottomView:(UIView*)bottomView andCommonAncestor:(UIView*)commonAncestor {
+    
+    [self matchXCenterOfView:bottomView withXCenterOfView:topView andCommonAncestor:commonAncestor];
+    [self addHeightAndWidthConstrainttoView:bottomView withHeightParameter:bottomView.frame.size.height andWidthParameter:bottomView.frame.size.width];
+    [self.overlayView addConstraint:[NSLayoutConstraint constraintWithItem:bottomView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:topView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5]];
+}
+
 -(IBAction)removeOverlayFromTopCloseButton:(UIButton*)topCloseButton {
     //Add animation to top close button as soon as it is pressed
     
-    [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
+    [UIView animateWithDuration:MEDIUM_ANIMATION_DURATION animations:^{
         CGAffineTransform scaleTransform = CGAffineTransformMakeScale(0.1, 0.1);
         CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(M_PI);
         self.topCloseOverlayButton.transform = CGAffineTransformConcat(scaleTransform, rotationTransform);
@@ -329,13 +338,14 @@
              CustomSexyButton* button = [[CustomSexyButton alloc] initWithFrame:self.overlayShowHideButton.frame];
              button.identifier = optionsCount;
              JKOption* currentOptionObject = self.optionsCollection[optionsCount];
-             
+             //[button setBackgroundColor:[UIColor greenColor]];
              CGRect originalFrame = button.frame;
              originalFrame.size.height += 20;
              button.frame = originalFrame;
              button.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-             UILabel* buttonTitleLabel = [self createAndGetLabelForOptionsButtonWithFrame:CGRectMake(-(self.optionButtonsDimension/2), self.overlayShowHideButton.frame.size.height, 2 * self.overlayShowHideButton.frame.size.width, 30) andText:currentOptionObject.title];
+             UILabel* buttonTitleLabel = [self createAndGetLabelForOptionsButtonWithFrame:CGRectMake(-(DEFAULT_LABEL_WIDTH/2) + (self.optionButtonsDimension/2), self.optionButtonsDimension + 5, DEFAULT_LABEL_WIDTH, DEFAULT_LABEL_WIDTH/2) andText:currentOptionObject.title];
              [button addSubview:buttonTitleLabel];
+             //[buttonTitleLabel setBackgroundColor:[UIColor redColor]];
              CGFloat currentAngleValue = [anglesCollection[optionsCount] floatValue];
              button.offsetToApply = CGPointMake((_expansionRadius*sinf(currentAngleValue)), (-1 * _expansionRadius * cosf(currentAngleValue)));
              button.alpha = 0.0;
@@ -350,7 +360,7 @@
          }
      }
      
-     [UIView animateWithDuration:DEFAULT_ANIMATION_DURATION animations:^{
+     [UIView animateWithDuration:MEDIUM_ANIMATION_DURATION animations:^{
          self.overlayView.alpha = 1.0;
          self.overlayView.transform = CGAffineTransformMakeScale(1.0, 1.0);
          [self.parentController.view addSubview:self.overlayView];
@@ -361,8 +371,8 @@
          }
      } completion:^(BOOL finished) {
          self.overlayShowHideButton.alpha = 1.0;
-         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.20 target:self selector:@selector(openOptions:) userInfo:nil repeats:YES];
-         [UIView animateWithDuration:0.2* (self.numberOfOptions - 1) delay:0
+         self.timer = [NSTimer scheduledTimerWithTimeInterval:SMALL_ANIMATION_DURATION target:self selector:@selector(openOptions:) userInfo:nil repeats:YES];
+         [UIView animateWithDuration:SMALL_ANIMATION_DURATION * (self.numberOfOptions - 1) delay:0
               usingSpringWithDamping:0.35 initialSpringVelocity:5.0f
                              options:0 animations:^{
                                  self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(M_PI);
@@ -405,7 +415,7 @@
         }];
         
     } completion:^(BOOL finished) {
-        [self removeOverlayWithDelay:0.2 andCompletion:^{
+        [self removeOverlayWithDelay:SMALL_ANIMATION_DURATION andCompletion:^{
             if(self.OptionSelectedBlock) {
                 self.OptionSelectedBlock(sexyOptionsButton.identifier);
             }
@@ -427,7 +437,6 @@
         [anglesCollection addObject:@0];
     }
     else {
-        
         for(NSInteger counter = 0; counter<totalNumberOfElements; counter++) {
             if(counter == centerIndex && isOdd) {
                 [anglesCollection addObject:@0];

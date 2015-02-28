@@ -36,6 +36,9 @@
     
     //Setup parameters to use with this overlay
     [self.JKAnimatedViewInstance setOverlayBackgroundEffect:Transparent];
+    self.JKAnimatedViewInstance.mainOptionsButtonTitle = @"Sexy";
+    self.JKAnimatedViewInstance.mainOptionsButtonBackgroundImageName = @"gray.png";
+    self.JKAnimatedViewInstance.optionButtonsDimension = 30;
     
     //Create an actual view
     [self.JKAnimatedViewInstance createAndSetupOverlayView];

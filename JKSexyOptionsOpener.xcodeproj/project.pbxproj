@@ -107,7 +107,6 @@
 		383B831E1A9A975E00A23D01 /* JKSexyOptionsOpener */ = {
 			isa = PBXGroup;
 			children = (
-				389815511AA251FA00DC7854 /* Extra */,
 				389815501AA251E900DC7854 /* Demo */,
 				3898154F1AA251C800DC7854 /* classes */,
 				383B834D1A9AA1BE00A23D01 /* images */,
@@ -116,6 +115,7 @@
 				383B83291A9A975E00A23D01 /* Main.storyboard */,
 				383B832C1A9A975E00A23D01 /* Images.xcassets */,
 				383B832E1A9A975E00A23D01 /* LaunchScreen.xib */,
+				389815511AA251FA00DC7854 /* Extra */,
 				383B831F1A9A975E00A23D01 /* Supporting Files */,
 			);
 			path = JKSexyOptionsOpener;
