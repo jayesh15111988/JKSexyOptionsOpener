@@ -8,6 +8,7 @@
 
 #import "JKAnimatedOptionsOpenerView.h"
 #import "CustomSexyButton.h"
+#import "JKOption.h"
 
 #define SMALL_ANIMATION_DURATION 0.2
 #define MEDIUM_ANIMATION_DURATION 0.6
@@ -43,7 +44,7 @@
     self.overlayviewBackgroundEffect = Blurred;
     self.defaultTextFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
     self.optionsLabelTextColor = [UIColor blackColor];
-    self.optionsCollection = options;
+    self.optionsCollection = [self convertOptionDetailsDictionaryToModelObject:options];
     self.numberOfOptions = self.optionsCollection.count;
     NSAssert(self.numberOfOptions > 0, @"Number Of options must be positive number");
     self.overlayBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
@@ -53,6 +54,15 @@
     
     [self setExpansionRadiusWithValue:dimensionToConsider];
     return self;
+}
+
+-(NSArray*)convertOptionDetailsDictionaryToModelObject:(NSArray*)inputOptiondictionaryCollection {
+    NSMutableArray* optionModelObjectsCollection = [NSMutableArray new];
+    for(NSDictionary* individualOptionDetails in inputOptiondictionaryCollection) {
+        JKOption* modelOptionObject = [[JKOption alloc] initWithTitle:individualOptionDetails[JKOPTION_BUTTON_TITLE] andImageName:individualOptionDetails[JKOPTION_BUTTON_IMAGE_NAME]];
+        [optionModelObjectsCollection addObject:modelOptionObject];
+    }
+    return optionModelObjectsCollection;
 }
 
 - (void)setExpansionRadiusWithValue:(CGFloat)expansionRadius {

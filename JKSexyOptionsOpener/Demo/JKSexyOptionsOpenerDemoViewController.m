@@ -19,11 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    JKOption* firstOption = [[JKOption alloc] initWithTitle:@"first" andImageName:@"red.png"];
-    JKOption* secondOption = [[JKOption alloc] initWithTitle:@"second" andImageName:@"orange.png"];
-    JKOption* thirdOption = [[JKOption alloc] initWithTitle:@"third" andImageName:@"blue.png"];
-    
-    self.JKAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self andOptions:@[firstOption, secondOption, thirdOption]];
+    self.JKAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self andOptions:@[@{JKOPTION_BUTTON_TITLE : @"First", JKOPTION_BUTTON_IMAGE_NAME : @"red.png"}, @{JKOPTION_BUTTON_TITLE : @"Second", JKOPTION_BUTTON_IMAGE_NAME : @"orange.png"}, @{JKOPTION_BUTTON_TITLE : @"Third", JKOPTION_BUTTON_IMAGE_NAME : @"blue.png"}]];
     
     self.JKAnimatedViewInstance.OptionSelectedBlock = ^(NSUInteger optionSelected) {
         NSLog(@"Selected options is %lu", optionSelected);

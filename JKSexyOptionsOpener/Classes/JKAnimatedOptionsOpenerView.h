@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JKOption.h"
+
+#define JKOPTION_BUTTON_TITLE @"title"
+#define JKOPTION_BUTTON_IMAGE_NAME @"image"
 
 typedef NS_OPTIONS(NSUInteger, OverlayViewBackgroundEffect){
     Transparent,
