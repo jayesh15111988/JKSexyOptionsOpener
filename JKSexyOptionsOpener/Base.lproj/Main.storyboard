@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gg9-2B-ADB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -53,6 +53,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Sexy Options Opener Demo View Controller-->
+        <scene sceneID="ToT-2O-8dj">
+            <objects>
+                <viewController storyboardIdentifier="optionsOpenerDemo" id="gg9-2B-ADB" customClass="JKSexyOptionsOpenerDemoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WIj-jq-pe4"/>
+                        <viewControllerLayoutGuide type="bottom" id="zGM-iC-Ap8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8ab-CD-pdb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CAe-bF-Nsr">
+                                <rect key="frame" x="100" y="225" width="120" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="WtJ-by-VpS"/>
+                                    <constraint firstAttribute="height" constant="30" id="on6-1Y-1x2"/>
+                                </constraints>
+                                <state key="normal" title="Open Options">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openOptionsButtonPressed:" destination="gg9-2B-ADB" eventType="touchUpInside" id="Ly8-qD-rTC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="CAe-bF-Nsr" secondAttribute="centerX" id="HoH-2C-veg"/>
+                            <constraint firstAttribute="centerY" secondItem="CAe-bF-Nsr" secondAttribute="centerY" id="zmC-Pb-jRC"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yrJ-AI-FDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="683" y="159"/>
         </scene>
     </scenes>
     <resources>

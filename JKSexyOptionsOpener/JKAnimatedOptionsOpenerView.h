@@ -7,21 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JKOption.h"
 
 typedef NS_OPTIONS(NSUInteger, OverlayViewBackgroundEffect){
-    TransparentBackgroundEffect,
-    BlurredBackgroundEffect
+    Transparent,
+    Blurred
 };
 
-typedef void (^OptionSelected)(NSUInteger optionSelected);
-typedef void (^OperationCanceled)();
+typedef void (^OptionSelected)(NSUInteger selectedOption);
+typedef void (^OptionNotSelected)();
 
 @interface JKAnimatedOptionsOpenerView : UIView
 
--(instancetype)initWithParentController:(UIViewController*)parentViewController;
--(void)createAndSetupOverlayView;
-@property (assign) OverlayViewBackgroundEffect overlayviewBackgroundEffect;
-@property (strong, nonatomic) OptionSelected SelectedOptionBlock;
-@property (strong, nonatomic) OperationCanceled OperationCancelBlock;
+- (instancetype)initWithParentController:(UIViewController*)parentViewController andOptions:(NSArray*)options;
+- (void)createAndSetupOverlayView;
 - (void)openOptionsView;
+- (void)setOverlayBackgroundEffect:(OverlayViewBackgroundEffect)backgroundEffect;
+- (void)setExpansionRadiusWithValue:(CGFloat)expansionRadius;
+
+@property (assign) OverlayViewBackgroundEffect overlayviewBackgroundEffect;
+@property (strong, nonatomic) OptionSelected OptionSelectedBlock;
+@property (strong, nonatomic) OptionNotSelected OptionNotSelectedBlock;
+
+@property (strong) UIColor* optionsLabelTextColor;
+@property (strong) UIFont* defaultTextFont;
+
+@property (strong) NSString* mainOptionsButtonTitle;
+@property (strong) NSString* mainOptionsButtonBackgroundImageName;
+
+@property (assign) NSInteger optionButtonsDimension;
+
 @end

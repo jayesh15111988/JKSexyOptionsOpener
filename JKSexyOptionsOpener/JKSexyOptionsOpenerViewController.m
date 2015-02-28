@@ -39,14 +39,14 @@ typedef void (^OperationCanceled)();
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isOptionsOpened = NO;
+  /*  self.isOptionsOpened = NO;
     self.buttonDimension = 30;
     //Create an instance
     self.jkAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self];
     
     //Setup parameters to use with this overlay
     self.jkAnimatedViewInstance.overlayviewBackgroundEffect = TransparentBackgroundEffect;
-    
+    self.jkAnimatedViewInstance.numberOfOptions = 9;
     //Create an actual view
     [self.jkAnimatedViewInstance createAndSetupOverlayView];
     
@@ -73,7 +73,7 @@ typedef void (^OperationCanceled)();
     NSInteger maximumExpansionRadius = (self.expansionRadius - (self.buttonDimension));
     if(self.expansionRadius > maximumExpansionRadius) {
         self.expansionRadius = maximumExpansionRadius;
-    }
+    }*/
 }
 
 -(UIView*)getBlurredBackgroundView {
@@ -94,7 +94,7 @@ typedef void (^OperationCanceled)();
 }
 
 -(UIView*)getOverlayView {
-    if(!self.overlayView) {
+   /* if(!self.overlayView) {
         self.overlayView = [[UIView alloc] initWithFrame:self.view.frame];
         
         self.overlayView.transform = CGAffineTransformMakeScale(0.0, 0.0);
@@ -148,7 +148,8 @@ typedef void (^OperationCanceled)();
         [self.overlayView addGestureRecognizer:tapRecognizer];
     }
     self.topCloseOverlayButton.transform = CGAffineTransformIdentity;
-    return self.overlayView;
+    return self.overlayView;*/
+    return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 
@@ -159,7 +160,11 @@ typedef void (^OperationCanceled)();
         CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(M_PI);
         self.topCloseOverlayButton.transform = CGAffineTransformConcat(scaleTransform, rotationTransform);
     }];
-    [self removeOverlay];
+    [self removeOverlayWithCompletion:^{
+        if(self.OperationCancelBlock) {
+            self.OperationCancelBlock();
+        }
+    }];
 }
 
 -(void)addHeightAndWidthConstrainttoView:(UIView*)inputView withDimensionParameter:(CGFloat)desiredDimension {
@@ -183,10 +188,14 @@ typedef void (^OperationCanceled)();
 }
 
 - (void)removeOverlayFromParentView:(UITapGestureRecognizer*)sender {
-    [self removeOverlay];
+    [self removeOverlayWithCompletion:^{
+        if(self.OperationCancelBlock) {
+            self.OperationCancelBlock();
+        }
+    }];
 }
 
--(void)removeOverlay {
+-(void)removeOverlayWithCompletion:(void (^)())completion {
     NSLog(@"Cancel button pressed on the overlay view");
     self.isOptionsOpened = !self.isOptionsOpened;
     self.overlayShowHideButton.alpha = 0.0;
@@ -215,8 +224,8 @@ typedef void (^OperationCanceled)();
     } completion:^(BOOL finished) {
         [self.overlayView removeFromSuperview];
         self.overlayShowHideButton.transform = CGAffineTransformMakeRotation(0);
-        if(self.OperationCancelBlock) {
-            self.OperationCancelBlock();
+        if(completion) {
+            completion();
         }
     }];
 }
@@ -362,11 +371,11 @@ typedef void (^OperationCanceled)();
         }];
         
     } completion:^(BOOL finished) {
-        [self removeOverlay];
-        if(self.SelectedOptionBlock) {
-            sexyOptionsButton.isButtonSelected = YES;
-            self.SelectedOptionBlock(sexyOptionsButton.identifier);
-        }
+        [self removeOverlayWithCompletion:^{
+            if(self.SelectedOptionBlock) {
+                self.SelectedOptionBlock(sexyOptionsButton.identifier);
+            }
+        }];
     }];
 }
 

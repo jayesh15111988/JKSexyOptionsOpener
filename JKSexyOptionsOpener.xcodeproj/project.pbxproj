@@ -14,7 +14,6 @@
 		383B83301A9A975E00A23D01 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 383B832E1A9A975E00A23D01 /* LaunchScreen.xib */; };
 		383B833C1A9A975E00A23D01 /* JKSexyOptionsOpenerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B833B1A9A975E00A23D01 /* JKSexyOptionsOpenerTests.m */; };
 		383B834A1A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */; };
-		383B834C1A9A9C7500A23D01 /* rf.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 383B834B1A9A9C7500A23D01 /* rf.jpg */; };
 		383B83541A9AA27500A23D01 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B834E1A9AA27500A23D01 /* red.png */; };
 		383B83551A9AA27500A23D01 /* gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B834F1A9AA27500A23D01 /* gray.png */; };
 		383B83561A9AA27500A23D01 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B83501A9AA27500A23D01 /* green.png */; };
@@ -24,6 +23,8 @@
 		383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */; };
 		3873E23D1A9F559B002ADDB4 /* close-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3873E23C1A9F559B002ADDB4 /* close-button.png */; };
 		389815471AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */; };
+		3898154A1AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 389815491AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.m */; };
+		3898154D1AA2482200DC7854 /* JKOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 3898154C1AA2482200DC7854 /* JKOption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,6 @@
 		383B833B1A9A975E00A23D01 /* JKSexyOptionsOpenerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKSexyOptionsOpenerTests.m; sourceTree = "<group>"; };
 		383B83481A9A991500A23D01 /* JKSexyOptionsOpenerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSexyOptionsOpenerViewController.h; sourceTree = "<group>"; };
 		383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSexyOptionsOpenerViewController.m; sourceTree = "<group>"; };
-		383B834B1A9A9C7500A23D01 /* rf.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rf.jpg; sourceTree = "<group>"; };
 		383B834E1A9AA27500A23D01 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
 		383B834F1A9AA27500A23D01 /* gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray.png; sourceTree = "<group>"; };
 		383B83501A9AA27500A23D01 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
@@ -62,6 +62,10 @@
 		3873E23C1A9F559B002ADDB4 /* close-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close-button.png"; sourceTree = "<group>"; };
 		389815451AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKAnimatedOptionsOpenerView.h; sourceTree = "<group>"; };
 		389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKAnimatedOptionsOpenerView.m; sourceTree = "<group>"; };
+		389815481AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKSexyOptionsOpenerDemoViewController.h; sourceTree = SOURCE_ROOT; };
+		389815491AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKSexyOptionsOpenerDemoViewController.m; sourceTree = SOURCE_ROOT; };
+		3898154B1AA2482200DC7854 /* JKOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKOption.h; sourceTree = "<group>"; };
+		3898154C1AA2482200DC7854 /* JKOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKOption.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,20 +107,16 @@
 		383B831E1A9A975E00A23D01 /* JKSexyOptionsOpener */ = {
 			isa = PBXGroup;
 			children = (
+				389815511AA251FA00DC7854 /* Extra */,
+				389815501AA251E900DC7854 /* Demo */,
+				3898154F1AA251C800DC7854 /* classes */,
 				383B834D1A9AA1BE00A23D01 /* images */,
 				383B83231A9A975E00A23D01 /* AppDelegate.h */,
 				383B83241A9A975E00A23D01 /* AppDelegate.m */,
 				383B83291A9A975E00A23D01 /* Main.storyboard */,
-				383B834B1A9A9C7500A23D01 /* rf.jpg */,
 				383B832C1A9A975E00A23D01 /* Images.xcassets */,
 				383B832E1A9A975E00A23D01 /* LaunchScreen.xib */,
-				383B83481A9A991500A23D01 /* JKSexyOptionsOpenerViewController.h */,
-				383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */,
-				389815451AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.h */,
-				389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */,
 				383B831F1A9A975E00A23D01 /* Supporting Files */,
-				383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */,
-				383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */,
 			);
 			path = JKSexyOptionsOpener;
 			sourceTree = "<group>";
@@ -159,6 +159,37 @@
 				383B83531A9AA27500A23D01 /* blue.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		3898154F1AA251C800DC7854 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				389815451AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.h */,
+				389815461AA16ED300DC7854 /* JKAnimatedOptionsOpenerView.m */,
+				383B835A1A9ADB1600A23D01 /* CustomSexyButton.h */,
+				383B835B1A9ADB1600A23D01 /* CustomSexyButton.m */,
+				3898154B1AA2482200DC7854 /* JKOption.h */,
+				3898154C1AA2482200DC7854 /* JKOption.m */,
+			);
+			name = classes;
+			sourceTree = "<group>";
+		};
+		389815501AA251E900DC7854 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				389815481AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.h */,
+				389815491AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.m */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+		389815511AA251FA00DC7854 /* Extra */ = {
+			isa = PBXGroup;
+			children = (
+				383B83481A9A991500A23D01 /* JKSexyOptionsOpenerViewController.h */,
+				383B83491A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m */,
+			);
+			name = Extra;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,7 +277,6 @@
 				383B83581A9AA27500A23D01 /* yellow.png in Resources */,
 				383B83571A9AA27500A23D01 /* orange.png in Resources */,
 				383B832B1A9A975E00A23D01 /* Main.storyboard in Resources */,
-				383B834C1A9A9C7500A23D01 /* rf.jpg in Resources */,
 				383B83551A9AA27500A23D01 /* gray.png in Resources */,
 				3873E23D1A9F559B002ADDB4 /* close-button.png in Resources */,
 				383B83301A9A975E00A23D01 /* LaunchScreen.xib in Resources */,
@@ -270,6 +300,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				383B83251A9A975E00A23D01 /* AppDelegate.m in Sources */,
+				3898154D1AA2482200DC7854 /* JKOption.m in Sources */,
+				3898154A1AA2363300DC7854 /* JKSexyOptionsOpenerDemoViewController.m in Sources */,
 				383B835C1A9ADB1600A23D01 /* CustomSexyButton.m in Sources */,
 				383B83221A9A975E00A23D01 /* main.m in Sources */,
 				383B834A1A9A991500A23D01 /* JKSexyOptionsOpenerViewController.m in Sources */,

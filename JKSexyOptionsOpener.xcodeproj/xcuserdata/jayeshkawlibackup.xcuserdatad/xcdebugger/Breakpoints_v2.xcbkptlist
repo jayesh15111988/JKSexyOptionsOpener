@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446792935.535372"
+            timestampString = "446843980.733396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
             landmarkName = "-openOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446792935.535372"
+            timestampString = "446843980.733396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-openOptionsButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446792935.535372"
+            timestampString = "446843980.733396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-openOptionsButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446792935.535372"
+            timestampString = "446843980.733396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "-buttonSelected:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKSexyOptionsOpenerViewController.m"
-            timestampString = "446792935.535372"
+            timestampString = "446793462.248418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-getOverlayView"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "-doit"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,12 +106,58 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "362"
-            endingLineNumber = "362"
-            landmarkName = "-openOptionsButtonPressed:"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "-removeOverlayFromTopCloseButton:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JKAnimatedOptionsOpenerView removeOverlayFromTopCloseButton:]"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+                  timestampString = "446844943.618588"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "71">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__63-[JKAnimatedOptionsOpenerView removeOverlayFromTopCloseButton:]_block_invoke"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+                  timestampString = "446844943.618858"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "27">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+            timestampString = "446845510.401956"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,12 +168,58 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-removeOverlay"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JKAnimatedOptionsOpenerView removeOverlayWithDelay:andCompletion:]"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+                  timestampString = "446844943.703555"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "720">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__68-[JKAnimatedOptionsOpenerView removeOverlayWithDelay:andCompletion:]_block_invoke_2"
+                  moduleName = "JKSexyOptionsOpener"
+                  urlString = "file:///Users/jayeshkawlibackup/Desktop/JKSexyOptionsOpener/JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+                  timestampString = "446844943.70385"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "15">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
+            timestampString = "446845510.401956"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -138,12 +230,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-removeOverlay"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,12 +246,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "-openOptionsButtonPressed:"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,28 +262,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
+            timestampString = "446845510.401956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
-            landmarkName = "-openOptionsButtonPressed:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JKSexyOptionsOpener/JKAnimatedOptionsOpenerView.m"
-            timestampString = "446792908.840272"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "-openOptionsButtonPressed:"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "-removeOverlayWithDelay:andCompletion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
