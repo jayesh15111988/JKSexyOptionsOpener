@@ -12,6 +12,8 @@
 @interface JKSexyOptionsOpenerDemoViewController ()
 @property (strong) JKAnimatedOptionsOpenerView* JKAnimatedViewInstance;
 @property (strong) UIView* animatedView;
+@property (weak, nonatomic) IBOutlet UILabel *selectedOptionLabel;
+
 @end
 
 @implementation JKSexyOptionsOpenerDemoViewController
@@ -19,14 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.JKAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self andOptions:@[@{JKOPTION_BUTTON_TITLE : @"First", JKOPTION_BUTTON_IMAGE_NAME : @"red.png"}, @{JKOPTION_BUTTON_TITLE : @"Second", JKOPTION_BUTTON_IMAGE_NAME : @"orange.png"}, @{JKOPTION_BUTTON_TITLE : @"Third", JKOPTION_BUTTON_IMAGE_NAME : @"blue.png"}]];
+    self.JKAnimatedViewInstance = [[JKAnimatedOptionsOpenerView alloc] initWithParentController:self andOptions:@[@{JKOPTION_BUTTON_TITLE : @"First", JKOPTION_BUTTON_IMAGE_NAME : @"red.png"}, @{JKOPTION_BUTTON_TITLE : @"Second", JKOPTION_BUTTON_IMAGE_NAME : @"orange.png"}, @{JKOPTION_BUTTON_TITLE : @"Third", JKOPTION_BUTTON_IMAGE_NAME : @"blue.png"}, @{JKOPTION_BUTTON_TITLE : @"Fourth", JKOPTION_BUTTON_IMAGE_NAME : @"green.png"}, @{JKOPTION_BUTTON_TITLE : @"Fifth", JKOPTION_BUTTON_IMAGE_NAME : @"gray.png"}]];
     
+    __weak typeof(self) weakSelf = self;
     self.JKAnimatedViewInstance.OptionSelectedBlock = ^(NSUInteger optionSelected) {
+        __strong typeof(self) strongSelf = weakSelf;
         NSLog(@"Selected options is %lu", optionSelected);
+        strongSelf.selectedOptionLabel.text = [NSString stringWithFormat:@"You have selected option number %lu", (long)optionSelected + 1];
     };
     
     self.JKAnimatedViewInstance.OptionNotSelectedBlock = ^() {
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf.selectedOptionLabel.text = @"You Selected close overlay option";
         NSLog(@"Operation cancalled");
+        
     };
 
     
@@ -36,8 +44,7 @@
     self.JKAnimatedViewInstance.mainOptionsButtonBackgroundImageName = @"gray.png";
     self.JKAnimatedViewInstance.optionButtonsDimension = 30;
     //These are default color parameters - User can change them before calling createAndSetupOverlayView method on foreground overlay view
-    self.JKAnimatedViewInstance.optionsLabelTextColor = [UIColor redColor];
-    self.JKAnimatedViewInstance.overlayBackgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    self.JKAnimatedViewInstance.optionsLabelTextColor = [UIColor whiteColor];
     
     //Create an actual view
     [self.JKAnimatedViewInstance createAndSetupOverlayView];

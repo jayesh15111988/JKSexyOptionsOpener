@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gg9-2B-ADB">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Sexy Options Opener View Controller-->
@@ -79,14 +80,29 @@
                                     <action selector="openOptionsButtonPressed:" destination="gg9-2B-ADB" eventType="touchUpInside" id="Ly8-qD-rTC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Option" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I5r-3Q-Fkn">
+                                <rect key="frame" x="20" y="95" width="280" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="qXU-8G-8cl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="0.32035152924989263" green="0.56017203282828287" blue="0.33902350232640732" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="I5r-3Q-Fkn" firstAttribute="leading" secondItem="8ab-CD-pdb" secondAttribute="leadingMargin" constant="4" id="5EF-ir-oAj"/>
                             <constraint firstAttribute="centerX" secondItem="CAe-bF-Nsr" secondAttribute="centerX" id="HoH-2C-veg"/>
+                            <constraint firstItem="I5r-3Q-Fkn" firstAttribute="top" secondItem="WIj-jq-pe4" secondAttribute="bottom" constant="75" id="sJt-cE-bpf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="I5r-3Q-Fkn" secondAttribute="trailing" constant="4" id="tuw-Yv-qGu"/>
                             <constraint firstAttribute="centerY" secondItem="CAe-bF-Nsr" secondAttribute="centerY" id="zmC-Pb-jRC"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="selectedOptionLabel" destination="I5r-3Q-Fkn" id="j3W-TC-YkB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yrJ-AI-FDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
