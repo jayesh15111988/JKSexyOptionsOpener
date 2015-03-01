@@ -5,7 +5,15 @@ I came out about creating this library while looking at similar animations made 
 
 ##Here is the GIF showing the little demo for this library : 
 
+Demo with Transparent background
+
 ![alt text][sexyOptionsLibraryDemoImage]
+
+<br/><br/>
+
+Demo with Blurred background
+
+![alt text][sexyOptionsLibraryDemoImageBlurred]
 
 **How to add JKSexyOptionsOpener in the project.**
 
@@ -93,5 +101,5 @@ And that's it. It's done already. It is very basic and I am looking forward to a
 Enjoy!
 
 [sexyOptionsLibraryDemoImage]: https://github.com/jayesh15111988/JKSexyOptionsOpener/blob/master/Screenshots/JKAnimated%20Options%20Demo.gif "JKOptions Opener Demo"
-
+[sexyOptionsLibraryDemoImageBlurred]: https://github.com/jayesh15111988/JKSexyOptionsOpener/blob/master/Screenshots/JKAnimated%20Options%20Demo%20Blurred.gif "JKOptions Blurred Overlay Demo"
 
