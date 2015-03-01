@@ -37,15 +37,13 @@
         
     };
 
-    
     //Setup parameters to use with this overlay
-    [self.JKAnimatedViewInstance setOverlayBackgroundEffect:Transparent];
+    [self.JKAnimatedViewInstance setOverlayBackgroundEffect:Blurred];
     self.JKAnimatedViewInstance.mainOptionsButtonTitle = @"Sexy Options";
     self.JKAnimatedViewInstance.mainOptionsButtonBackgroundImageName = @"gray.png";
     self.JKAnimatedViewInstance.optionButtonsDimension = 30;
     //These are default color parameters - User can change them before calling createAndSetupOverlayView method on foreground overlay view
-    self.JKAnimatedViewInstance.optionsLabelTextColor = [UIColor whiteColor];
-    
+    self.JKAnimatedViewInstance.optionsLabelTextColor = [UIColor blackColor];
     //Create an actual view
     [self.JKAnimatedViewInstance createAndSetupOverlayView];
 }

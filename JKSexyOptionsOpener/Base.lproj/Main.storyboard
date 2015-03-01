@@ -89,15 +89,38 @@
                                 <color key="textColor" red="0.32035152924989263" green="0.56017203282828287" blue="0.33902350232640732" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="optionsDemoScreenshot.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uto-DJ-lYA">
+                                <rect key="frame" x="40" y="283" width="240" height="177"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="167" id="AX8-VN-QOM"/>
+                                    <constraint firstAttribute="width" constant="240" id="wsP-o2-LwT"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AX8-VN-QOM"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Uto-DJ-lYA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CAe-bF-Nsr" secondAttribute="bottom" constant="28" id="3a4-t2-0Z6"/>
                             <constraint firstItem="I5r-3Q-Fkn" firstAttribute="leading" secondItem="8ab-CD-pdb" secondAttribute="leadingMargin" constant="4" id="5EF-ir-oAj"/>
+                            <constraint firstItem="Uto-DJ-lYA" firstAttribute="leading" secondItem="8ab-CD-pdb" secondAttribute="leadingMargin" constant="24" id="77i-lH-o3Z"/>
                             <constraint firstAttribute="centerX" secondItem="CAe-bF-Nsr" secondAttribute="centerX" id="HoH-2C-veg"/>
+                            <constraint firstAttribute="centerX" secondItem="Uto-DJ-lYA" secondAttribute="centerX" id="edo-pT-Qcb"/>
+                            <constraint firstItem="zGM-iC-Ap8" firstAttribute="top" secondItem="Uto-DJ-lYA" secondAttribute="bottom" constant="20" id="fk8-h7-AyX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uto-DJ-lYA" secondAttribute="trailing" constant="24" id="gBM-pW-qtm"/>
                             <constraint firstItem="I5r-3Q-Fkn" firstAttribute="top" secondItem="WIj-jq-pe4" secondAttribute="bottom" constant="75" id="sJt-cE-bpf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="I5r-3Q-Fkn" secondAttribute="trailing" constant="4" id="tuw-Yv-qGu"/>
                             <constraint firstAttribute="centerY" secondItem="CAe-bF-Nsr" secondAttribute="centerY" id="zmC-Pb-jRC"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="77i-lH-o3Z"/>
+                                <exclude reference="gBM-pW-qtm"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
@@ -111,6 +134,7 @@
     </scenes>
     <resources>
         <image name="green.png" width="128" height="128"/>
+        <image name="optionsDemoScreenshot.png" width="1024" height="768"/>
         <image name="rf.jpg" width="460" height="276"/>
     </resources>
 </document>
