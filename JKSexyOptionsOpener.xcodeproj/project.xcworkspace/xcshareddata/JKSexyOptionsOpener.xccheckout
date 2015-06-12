@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>616B9956-11D5-4C37-B518-D61FB63E3FC1</string>
 	<key>IDESourceControlProjectName</key>
-	<string>JKSexyOptionsOpener</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>507C374C19A8F5B3DC2242CC03063F09A43421C6</key>
 		<string>github.com:jayesh15111988/JKSexyOptionsOpener.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>JKSexyOptionsOpener.xcodeproj</string>
+	<string>JKSexyOptionsOpener.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>507C374C19A8F5B3DC2242CC03063F09A43421C6</key>

@@ -38,7 +38,7 @@
     };
 
     //Setup parameters to use with this overlay
-    [self.JKAnimatedViewInstance setOverlayBackgroundEffect:Blurred];
+    [self.JKAnimatedViewInstance setOverlayBackgroundEffect:OverlayViewBackgroundEffectTransparent];
     self.JKAnimatedViewInstance.mainOptionsButtonTitle = @"Sexy Options";
     self.JKAnimatedViewInstance.mainOptionsButtonBackgroundImageName = @"gray.png";
     self.JKAnimatedViewInstance.optionButtonsDimension = 30;

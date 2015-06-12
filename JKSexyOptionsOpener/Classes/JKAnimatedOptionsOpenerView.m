@@ -41,7 +41,7 @@
     self.parentController = parentViewController;
     self.isOptionsOpened = NO;
     self.optionButtonsDimension = 30;
-    self.overlayviewBackgroundEffect = Blurred;
+    self.overlayviewBackgroundEffect = OverlayViewBackgroundEffectBlurred;
     self.defaultTextFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0];
     self.optionsLabelTextColor = [UIColor blackColor];
     self.optionsCollection = [self convertOptionDetailsDictionaryToModelObject:options];
@@ -75,9 +75,9 @@
 
 - (void)setOverlayBackgroundEffect:(OverlayViewBackgroundEffect)backgroundEffect {
     self.overlayviewBackgroundEffect = backgroundEffect;
-    if(backgroundEffect == Transparent) {
+    if(backgroundEffect == OverlayViewBackgroundEffectTransparent) {
         self.optionsLabelTextColor = [UIColor whiteColor];
-    } else if (backgroundEffect == Blurred) {
+    } else if (backgroundEffect == OverlayViewBackgroundEffectBlurred) {
         self.optionsLabelTextColor = [UIColor blackColor];
     }
 }
@@ -87,7 +87,7 @@
     [self.parentController.view addSubview:self.overlayView];
     [self addConstraintToView:self.overlayView relativeToSuperview:self.parentController.view withTopOffset:20.0];
     
-    if(self.overlayviewBackgroundEffect == Blurred) {
+    if(self.overlayviewBackgroundEffect == OverlayViewBackgroundEffectBlurred) {
         [self addConstraintToView:self.blurredView relativeToSuperview:self.overlayView withTopOffset:0.0];
     }
 }
@@ -100,9 +100,9 @@
         self.overlayView.alpha = 0.0;
         self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        if(self.overlayviewBackgroundEffect == Transparent) {
+        if(self.overlayviewBackgroundEffect == OverlayViewBackgroundEffectTransparent) {
             self.overlayView.backgroundColor = self.overlayBackgroundColor;
-        } else if (self.overlayviewBackgroundEffect == Blurred) {
+        } else if (self.overlayviewBackgroundEffect == OverlayViewBackgroundEffectBlurred) {
             [self.overlayView addSubview:[self getBlurredBackgroundView]];
         }
         
@@ -376,7 +376,7 @@
          [self.parentController.view addSubview:self.overlayView];
          [self addConstraintToView:self.overlayView relativeToSuperview:self.parentController.view withTopOffset:20.0];
      
-         if(self.overlayviewBackgroundEffect == Blurred) {
+         if(self.overlayviewBackgroundEffect == OverlayViewBackgroundEffectBlurred) {
              [self addConstraintToView:self.blurredView relativeToSuperview:self.overlayView withTopOffset:0.0];
          }
      } completion:^(BOOL finished) {

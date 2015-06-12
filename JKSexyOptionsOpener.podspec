@@ -80,6 +80,9 @@ Pod::Spec.new do |s|
 
   s.source_files  = "Classes", "JKSexyOptionsOpener/Classes/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
+  
+  #Commenting this stuff as it's used only for demo purpose. Not really useful for actual library. 
+  #User can specify their own file names if required to customize the appearance.
 
   #s.resource  = "icon.png"
   #s.resources = "JKSexyOptionsOpener/images/*.{png, jpg, jpeg}"

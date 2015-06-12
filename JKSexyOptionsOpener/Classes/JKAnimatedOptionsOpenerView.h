@@ -12,8 +12,8 @@
 #define JKOPTION_BUTTON_IMAGE_NAME @"image"
 
 typedef NS_OPTIONS(NSUInteger, OverlayViewBackgroundEffect){
-    Transparent,
-    Blurred
+    OverlayViewBackgroundEffectTransparent,
+    OverlayViewBackgroundEffectBlurred
 };
 
 typedef void (^OptionSelected)(NSUInteger selectedOption);
